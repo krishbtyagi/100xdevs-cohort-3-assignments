@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color Changer</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 50px;
+            text-align: center;
+            margin-top: 450px;
+        }
+
+        .color-panel {
+            border-radius: 5px;
+            border: 2px black solid;
+            margin: 40px auto;
+            display: inline-flex; 
+            padding: 10px;
+            white-space: nowrap; 
+            overflow-x: auto; 
+        }
+
+        .add-color {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .add-color input {
+            width: 300px;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 2px solid black;
+        }
+
+        .add-color button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 2px solid black;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .add-color button:hover {
+            background-color: #ddd;
+        }
+
+        .color-button {
+            border-radius: 5px;
+            border: 1px black dotted;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .color-button:hover {
+            opacity: 0.8; 
+        }
+
+        .red-button { background-color: red; }
+        .yellow-button { background-color: yellow; }
+        .black-button { background-color: black; color: white; }
+        .purple-button { background-color: purple; }
+        .green-button { background-color: green; }
+        .blue-button { background-color: blue; }
+    </style>
+</head>
+<body>
+    <div class="color-panel" id="colorPanel">
+        <button class="color-button red-button" onclick="changeColor('red')">Red</button>
+        <button class="color-button yellow-button" onclick="changeColor('yellow')">Yellow</button>
+        <button class="color-button black-button" onclick="changeColor('black')">Black</button>
+        <button class="color-button purple-button" onclick="changeColor('purple')">Purple</button>
+        <button class="color-button green-button" onclick="changeColor('green')">Green</button>
+        <button class="color-button blue-button" onclick="changeColor('blue')">Blue</button>
+    </div>
+    <div class="add-color">
+        <input type="text" id="colorInput" placeholder="Enter a color (e.g., blue, #123456)">
+        <button onclick="addColor()">Add Color</button>
+    </div>
+    <script>
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+        function addColor() {
+            const colorInput = document.getElementById("colorInput");
+            const color = colorInput.value.trim();
+
+            // Validate input
+            if (!color) {
+                alert("Please enter a color.");
+                return;
+            }
+
+            // Create new button
+            const button = document.createElement("button");
+            button.className = "color-button";
+            button.style.backgroundColor = color;
+            button.textContent = color.charAt(0).toUpperCase() + color.slice(1); 
+            button.setAttribute("onclick", `changeColor('${color}')`);
+
+            // Append to the color panel
+            const colorPanel = document.getElementById("colorPanel");
+            colorPanel.appendChild(button);
+
+            // Clear the input field
+            colorInput.value = "";
+        }
+    </script>
+</body>
+</html>
