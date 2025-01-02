@@ -10,7 +10,20 @@ const app = express();
 // User will be sending in their user id in the header as 'user-id'
 // You have been given a numberOfRequestsForUser object to start off with which
 // clears every one second
-
+app.use(function(req, res, next){
+  const userId = req.headers["user-id"];
+  if(numberOfRequestsForUser[userId]){
+    numberOfRequestsForUser[userId] = numberOfRequestsForUser[userId] + 1;
+    if(numberOfRequestsForUser[userId]>5){
+      res.status(404).send("you are not allowed");
+    } else{
+      next()
+    }
+  }else{
+    numberOfRequestsForUser[userId] = 1;
+    next();
+  } 
+})
 let numberOfRequestsForUser = {};
 setInterval(() => {
     numberOfRequestsForUser = {};

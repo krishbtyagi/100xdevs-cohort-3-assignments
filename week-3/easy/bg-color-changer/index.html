@@ -92,24 +92,20 @@
             const colorInput = document.getElementById("colorInput");
             const color = colorInput.value.trim();
 
-            // Validate input
             if (!color) {
                 alert("Please enter a color.");
                 return;
             }
 
-            // Create new button
             const button = document.createElement("button");
             button.className = "color-button";
             button.style.backgroundColor = color;
             button.textContent = color.charAt(0).toUpperCase() + color.slice(1); 
             button.setAttribute("onclick", `changeColor('${color}')`);
 
-            // Append to the color panel
             const colorPanel = document.getElementById("colorPanel");
             colorPanel.appendChild(button);
-
-            // Clear the input field
+            
             colorInput.value = "";
         }
     </script>
